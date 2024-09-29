@@ -3,259 +3,182 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Order Form</title>
+    <title>Employee Orders</title>
     <style>
       body {
-        font-family: "Arial", sans-serif;
-        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f5;
         color: #333;
         margin: 0;
-        padding: 0;
-      }
-      .container {
-        width: 80%;
-        margin: 50px auto;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
       }
       h1 {
-        color: #5914c8;
-        margin-bottom: 20px;
+        color: #6a0dad;
+        text-align: center;
+        font-size: 2em; /* Increase font size */
+        font-weight: bold; /* Make it bold */
       }
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-        font-size: 18px; /* تكبير حجم الخط */
-        font-weight: bold; /* جعل النص بخط عريض */
+      .menu {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
-      table th,
-      table td {
-        padding: 15px;
-        border: 1px solid #ddd;
-        text-align: left;
-      }
-      th {
-        background-color: #8a2392;
-        color: white;
+      .menu-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 1.1em; /* Increase font size for menu items */
+        font-weight: bold; /* Make menu items bold */
       }
       form {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        margin-top: 30px;
+      }
+      label,
+      input {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        font-size: 1.1em; /* Increase font size */
       }
       input[type="text"] {
+        font-size: 1em; /* Keep input text size */
+      }
+      button {
+        width: 100%;
         padding: 10px;
+        background-color: #6a0dad;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.1em;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #5c0bb8;
+      }
+      .login-section {
+        margin-top: 40px;
+        text-align: center;
+      }
+      .login-section input {
         margin: 5px 0;
-        width: 60%;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      input[type="submit"] {
-        background-color: #8a2392;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-      input[type="submit"]:hover {
-        background-color: #571a5c;
-      }
-
-      #login-container {
-        margin-top: 30px;
-        background-color: #f1f1f1;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        width: 50%;
-        margin: 30px auto;
-      }
-      #login-container h2 {
-        color: #5914c8;
-      }
-      #password {
-        padding: 10px;
-        width: 80%;
-        margin: 10px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      #login-container button {
-        background-color: #8a2392;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 4px;
-      }
-      #login-container button:hover {
-        background-color: #571a5c;
-      }
-
-      #message {
-        margin-top: 20px;
-        font-size: 18px;
-        color: #333;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Price List</h1>
-      <table>
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-        </tr>
-        <tr>
-          <td>Chocolate Cake</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Vanilla Cookies</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>Mixed Sweets</td>
-          <td>25</td>
-        </tr>
-        <tr>
-          <td>Coconut Candy</td>
-          <td>18</td>
-        </tr>
-        <tr>
-          <td>Fruit Tart</td>
-          <td>22</td>
-        </tr>
-        <tr>
-          <td>Brownie</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Cheesecake</td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td>Macarons</td>
-          <td>35</td>
-        </tr>
-        <tr>
-          <td>Lemon Meringue Pie</td>
-          <td>28</td>
-        </tr>
-        <tr>
-          <td>Carrot Cake</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Peanut Butter Cookies</td>
-          <td>15</td>
-        </tr>
-        <tr>
-          <td>Fruit Cake</td>
-          <td>40</td>
-        </tr>
-        <tr>
-          <td>Pineapple Upside-Down Cake</td>
-          <td>25</td>
-        </tr>
-        <tr>
-          <td>Red Velvet Cake</td>
-          <td>35</td>
-        </tr>
-        <tr>
-          <td>Chocolate Chip Cookies</td>
-          <td>10</td>
-        </tr>
-        <tr>
-          <td>Oreo Cheesecake</td>
-          <td>30</td>
-        </tr>
-        <tr>
-          <td>Pavlova</td>
-          <td>20</td>
-        </tr>
-        <tr>
-          <td>Tiramisu</td>
-          <td>35</td>
-        </tr>
-        <tr>
-          <td>Flan</td>
-          <td>12</td>
-        </tr>
-        <tr>
-          <td>Peach Cobbler</td>
-          <td>18</td>
-        </tr>
-        <tr>
-          <td>Churros</td>
-          <td>15</td>
-        </tr>
-      </table>
-
-      <h1>Order Form</h1>
-      <form id="orderForm">
-        <input type="text" id="name" placeholder="Name" required />
-        <input type="text" id="product" placeholder="Product Name" required />
-        <input type="submit" value="Submit Order" />
-      </form>
-
-      <div id="login-container">
-        <h2>Ashraf's Box</h2>
-        <input type="password" id="password" placeholder="Enter password" />
-        <button onclick="checkPassword()">do5ol</button>
-      </div>
-
-      <div id="message" style="margin-top: 20px"></div>
+    <h1>Order List</h1>
+    <div class="menu">
+      <div class="menu-item"><span>Type 1</span><span>10 EGP</span></div>
+      <div class="menu-item"><span>Type 2</span><span>15 EGP</span></div>
+      <div class="menu-item"><span>Type 3</span><span>20 EGP</span></div>
+      <div class="menu-item"><span>Type 4</span><span>25 EGP</span></div>
+      <div class="menu-item"><span>Type 5</span><span>30 EGP</span></div>
+      <div class="menu-item"><span>Type 6</span><span>35 EGP</span></div>
+      <div class="menu-item"><span>Type 7</span><span>40 EGP</span></div>
+      <div class="menu-item"><span>Type 8</span><span>45 EGP</span></div>
+      <div class="menu-item"><span>Type 9</span><span>50 EGP</span></div>
+      <div class="menu-item"><span>Type 10</span><span>55 EGP</span></div>
+      <div class="menu-item"><span>Type 11</span><span>60 EGP</span></div>
+      <div class="menu-item"><span>Type 12</span><span>65 EGP</span></div>
+      <div class="menu-item"><span>Type 13</span><span>70 EGP</span></div>
+      <div class="menu-item"><span>Type 14</span><span>75 EGP</span></div>
+      <div class="menu-item"><span>Type 15</span><span>80 EGP</span></div>
+      <div class="menu-item"><span>Type 16</span><span>85 EGP</span></div>
+      <div class="menu-item"><span>Type 17</span><span>90 EGP</span></div>
+      <div class="menu-item"><span>Type 18</span><span>95 EGP</span></div>
+      <div class="menu-item"><span>Type 19</span><span>100 EGP</span></div>
+      <div class="menu-item"><span>Type 20</span><span>105 EGP</span></div>
     </div>
 
-    <script>
+    <form id="orderForm">
+      <label for="employeeName">Employee Name:</label>
+      <input
+        type="text"
+        id="employeeName"
+        placeholder="Enter your name"
+        required
+      />
+
+      <label for="order">Your Order:</label>
+      <input
+        type="text"
+        id="order"
+        placeholder="Enter your order (e.g., Type 1)"
+        required
+      />
+
+      <button type="submit">Submit Order</button>
+    </form>
+
+    <div class="login-section">
+      <h2>Seller Login</h2>
+      <input
+        type="password"
+        id="sellerPassword"
+        placeholder="Enter password"
+        required
+      />
+      <button id="loginButton">Login</button>
+    </div>
+
+    <!-- Load Firebase libraries -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCEwxLwyF8f4uoUTFSCn9Vp5XxCqc-oce8",
+        authDomain: "menu-72910.firebaseapp.com",
+        projectId: "menu-72910",
+        storageBucket: "menu-72910.appspot.com",
+        messagingSenderId: "174700476301",
+        appId: "1:174700476301:web:69f2b06594424e1e76afc4",
+        measurementId: "G-49LTY66QH8",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
       document
         .getElementById("orderForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-          const name = document.getElementById("name").value;
-          const product = document.getElementById("product").value;
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
 
-          fetch(
-            "https://script.google.com/macros/s/AKfycbwNnq8mClLQHcbv7y1o-Jpt7ZhyhqeQKVqsHEzgqHiUhBM5ojptBTdZqCgoFKxT7xGUUg/exec",
-            {
-              method: "POST",
-              body: JSON.stringify({ name: name, product: product }),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          )
-            .then((response) => response.text())
-            .then((data) => {
-              document.getElementById(
-                "message"
-              ).innerText = `Order submitted: ${product} by ${name}.`;
-              event.target.reset();
-            })
-            .catch((error) => {
-              console.error("Error:", error);
+          const employeeName = document.getElementById("employeeName").value;
+          const order = document.getElementById("order").value;
+          const orderTime = new Date().toLocaleString();
+
+          try {
+            await addDoc(collection(db, "orders"), {
+              name: employeeName,
+              order: order,
+              time: orderTime,
             });
+            alert("Order submitted successfully!");
+            document.getElementById("orderForm").reset();
+          } catch (error) {
+            alert("Error occurred: " + error);
+          }
         });
 
-      function checkPassword() {
-        const password = document.getElementById("password").value;
-        const correctPassword = "1234"; // استبدل بكلمة المرور الخاصة بك
-
-        if (password === correctPassword) {
-          // إعادة توجيه المستخدم إلى صفحة البائع
-          window.location.href = "seller.html"; // استبدل برابط صفحة البائع الصحيحة
-        } else {
-          alert("Incorrect password. Please try again.");
-        }
-      }
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", function () {
+          const password = document.getElementById("sellerPassword").value;
+          if (password === "1234") {
+            window.location.href = "seller.html";
+          } else {
+            alert("Incorrect password");
+          }
+        });
     </script>
   </body>
 </html>

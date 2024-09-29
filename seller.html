@@ -3,131 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seller Dashboard</title>
+    <title>Seller Orders</title>
     <style>
       body {
-        font-family: "Arial", sans-serif;
-        background-color: #f9f9f9;
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f5;
         color: #333;
         margin: 0;
-        padding: 0;
-      }
-      .container {
-        width: 80%;
-        margin: 50px auto;
-        text-align: center;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
       }
       h1 {
-        color: #8a2392;
-        margin-bottom: 20px;
+        color: #6a0dad;
+        text-align: center;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        margin-bottom: 20px;
-      }
-      table th,
-      table td {
-        padding: 15px;
-        border: 1px solid #ddd;
-        text-align: left;
-      }
-      th {
-        background-color: #8a2392;
-        color: white;
-      }
-      button {
-        background-color: #8a2392;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        cursor: pointer;
-        border-radius: 4px;
         margin-top: 20px;
       }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+        border: 1px solid #ddd;
+        font-size: 1.1em;
+        font-weight: bold; /* Set bold for table text */
+      }
+      th {
+        background-color: #6a0dad;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      button {
+        padding: 10px;
+        background-color: #6a0dad;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+      }
       button:hover {
-        background-color: #4c1550;
+        background-color: #5c0bb8;
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Orders List</h1>
-      <table id="ordersTable">
+    <h1>Employee Orders</h1>
+    <table>
+      <thead>
         <tr>
-          <th>Name</th>
-          <th>Product</th>
+          <th>Employee Name</th>
+          <th>Order</th>
           <th>Order Time</th>
         </tr>
-      </table>
-      <button onclick="clearOrders()">Clear Orders</button>
-    </div>
+      </thead>
+      <tbody id="ordersContainer"></tbody>
+    </table>
+    <button id="clearOrdersButton">Clear Orders</button>
 
-    <script>
-      // Fetch orders data from the Google Apps Script
-      function fetchOrders() {
-        fetch(
-          "https://script.google.com/macros/s/AKfycbwNnq8mClLQHcbv7y1o-Jpt7ZhyhqeQKVqsHEzgqHiUhBM5ojptBTdZqCgoFKxT7xGUUg/exec"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            const table = document.getElementById("ordersTable");
-            data.forEach((order) => {
-              const row = document.createElement("tr");
-              const nameCell = document.createElement("td");
-              const productCell = document.createElement("td");
-              const timeCell = document.createElement("td");
+    <script type="module">
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCEwxLwyF8f4uoUTFSCn9Vp5XxCqc-oce8",
+        authDomain: "menu-72910.firebaseapp.com",
+        projectId: "menu-72910",
+        storageBucket: "menu-72910.appspot.com",
+        messagingSenderId: "174700476301",
+        appId: "1:174700476301:web:69f2b06594424e1e76afc4",
+      };
 
-              nameCell.textContent = order.name;
-              productCell.textContent = order.product;
-              timeCell.textContent = new Date(order.timestamp).toLocaleString(); // تحويل الوقت إلى تنسيق مقروء
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        deleteDoc,
+        doc,
+      } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 
-              row.appendChild(nameCell);
-              row.appendChild(productCell);
-              row.appendChild(timeCell);
-              table.appendChild(row);
-            });
-          })
-          .catch((error) => {
-            console.error("Error fetching orders:", error);
-            alert("Error fetching orders.");
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      // Fetch and display orders
+      async function fetchOrders() {
+        const ordersContainer = document.getElementById("ordersContainer");
+        ordersContainer.innerHTML = ""; // Clear previous orders
+        const ordersSnapshot = await getDocs(collection(db, "orders"));
+        ordersSnapshot.forEach((doc) => {
+          const order = doc.data();
+          const orderRow = document.createElement("tr");
+          orderRow.innerHTML = `
+                    <td>${order.name}</td>
+                    <td>${order.order}</td>
+                    <td>${order.time}</td>
+                `;
+          ordersContainer.appendChild(orderRow);
+        });
+      }
+
+      // Clear orders
+      document
+        .getElementById("clearOrdersButton")
+        .addEventListener("click", async function () {
+          const ordersSnapshot = await getDocs(collection(db, "orders"));
+          ordersSnapshot.forEach(async (orderDoc) => {
+            await deleteDoc(doc(db, "orders", orderDoc.id)); // Use orderDoc.id to get the document reference
           });
-      }
+          alert("Orders cleared successfully!");
+          fetchOrders(); // Refresh the order list
+        });
 
-      // Clear all orders from the Google Apps Script with confirmation
-      function clearOrders() {
-        const confirmation = confirm(
-          "Are you sure you want to clear all orders?"
-        );
-        if (confirmation) {
-          fetch(
-            "https://script.google.com/macros/s/AKfycbwNnq8mClLQHcbv7y1o-Jpt7ZhyhqeQKVqsHEzgqHiUhBM5ojptBTdZqCgoFKxT7xGUUg/exec",
-            {
-              method: "DELETE",
-            }
-          )
-            .then((response) => {
-              if (response.ok) {
-                document.getElementById("ordersTable").innerHTML =
-                  "<tr><th>Name</th><th>Product</th><th>Order Time</th></tr>"; // Reset the table
-                alert("All orders cleared successfully.");
-              } else {
-                return response.text().then((text) => {
-                  alert(`Error clearing orders: ${text}`);
-                });
-              }
-            })
-            .catch((error) => {
-              console.error("Error clearing orders:", error);
-              alert("Error clearing orders.");
-            });
-        }
-      }
-
+      // Fetch orders on page load
       window.onload = fetchOrders;
     </script>
   </body>
